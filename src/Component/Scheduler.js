@@ -3,109 +3,188 @@ import { Card } from "react-bootstrap";
 import Fullcalendar from "./Fullcalendar";
 export default class Scheduler extends React.Component {
   state = {
+    dupCalendarEvents: "",
+    getentirecompany: [],
     calendarEvents: [
       // initial event data
 
       {
         Id: 1,
-        title: "Burj kalifa",
-        orderID: 451515,
+
+        title: "A90901",
+        BuildingName: "Burj kalifa",
+        //orderID: 451515,
         start: new Date(2019, 11, 15, 10, 0),
         end: new Date(2019, 11, 15, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 15),
         integratorAdmin: "mohammed",
         integratorTeam: "salman But",
-        backgroundColor: "red"
+        backgroundColor: "red",
+        companyName: "UST",
+        description: "long description"
       },
       {
         Id: 1,
-        title: "Effel Tower",
-        orderID: 451515,
+        title: "A1204",
+        BuildingName: "Effel Tower",
+        //orderID: 451515,
         start: new Date(2019, 11, 15, 10, 0),
         end: new Date(2019, 11, 15, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 15),
         integratorAdmin: "mohammed",
         integratorTeam: "salman But",
-        backgroundColor: "red"
+        backgroundColor: "red",
+        companyName: "UST"
       },
       {
         Id: 2,
-        title: "Thule Air Crash Report",
-        orderID: 21512,
+        title: "A1444",
+        BuildingName: "Thule Air Crash Report",
+        //orderID: 21512,
         start: new Date(2019, 11, 16, 10, 0),
         end: new Date(2019, 11, 16, 12, 30),
         status: "Pending",
         appointmentTime: new Date(2019, 11, 16),
         integratorAdmin: "Ajmal",
         integratorTeam: "akmal",
-        backgroundColor: "Yellow"
+        backgroundColor: "green",
+        companyName: "Firex"
       },
       {
         Id: 3,
-        title: "Blue Moon Eclipse",
-        orderID: 336221,
+        title: "A15504",
+        BuildingName: "Blue Moon Eclipse",
+        //orderID: 336221,
         start: new Date(2019, 11, 17, 10, 0),
         end: new Date(2019, 11, 17, 12, 30),
         status: "Completed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Riyas",
         integratorTeam: "rashid khan",
-        backgroundColor: "green"
+        backgroundColor: "orange",
+        companyName: "INT"
       },
       {
         Id: 4,
-        title: "Meteor Showers in 2018",
-        orderID: 84848,
+        title: "A04204",
+        BuildingName: "Meteor Showers in 2018",
+        // orderID: 84848,
         start: new Date(2019, 11, 17, 10, 0),
         end: new Date(2019, 11, 17, 12, 30),
         status: "Inprogress",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "grey"
+        backgroundColor: "#0678be",
+        companyName: "Saaj"
       },
       {
         Id: 4,
-        title: "Catacombs",
-        orderID: 84848,
+        title: "A8804",
+        BuildingName: "Catacombs",
+        //orderID: 84848,
         start: new Date(2019, 11, 17, 10, 0),
         end: new Date(2019, 11, 17, 12, 30),
         status: "Completed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "green"
+        backgroundColor: "#0678be",
+        companyName: "Saaj"
       },
       {
         Id: 4,
-        title: "Riyas",
-        orderID: 84848,
+        title: "A15504",
+        BuildingName: "Riyas",
+        //orderID: 84848,
         start: new Date(2019, 11, 17, 10, 0),
         end: new Date(2019, 11, 17, 12, 30),
         status: "Pending",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "Yellow"
+        backgroundColor: "orange",
+        companyName: "INT"
       },
       {
         Id: 4,
-        title: "ellaman",
-        orderID: 84848,
+        title: "A6574",
+        BuildingName: "ellaman",
+        //orderID: 84848,
         start: new Date(2019, 11, 17, 10, 0),
         end: new Date(2019, 11, 17, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "red"
+        backgroundColor: "green",
+        companyName: "Firex"
       }
     ]
   };
-  render() {
+  componentDidMount() {
     let { calendarEvents } = this.state;
+    this.state.dupCalendarEvents = calendarEvents;
+    this.getCompanyName();
+    // this.setState({ dupCalendarEvents: calendarEvents });
+  }
+  getCompanyName = () => {
+    let { calendarEvents } = this.state;
+
+    var getEntireCompany = calendarEvents.map(item => {
+      return item.companyName;
+    });
+    var arrset = Array.from(new Set(getEntireCompany));
+    console.log("getEntireCompany", arrset);
+    this.setState({ getentirecompany: arrset });
+  };
+
+  getFilterStatus = data => {
+    let { calendarEvents, dupCalendarEvents } = this.state;
+    console.log("schedule------->>>", data);
+    // var dupCalendarEvents = calendarEvents;
+    var scheduledArr = [];
+    if (data === "Assesed") {
+      dupCalendarEvents.filter(item => {
+        if (item.status === "Assesed") {
+          scheduledArr.push(item);
+        }
+      });
+      console.log("scheduledArr", scheduledArr);
+      this.setState({ calendarEvents: scheduledArr });
+    } else if (data === "Inprogress") {
+      dupCalendarEvents.filter(item => {
+        if (item.status === "Inprogress") {
+          scheduledArr.push(item);
+        }
+      });
+      console.log("scheduledArr", scheduledArr);
+      this.setState({ calendarEvents: scheduledArr });
+    } else if (data === "Pending") {
+      dupCalendarEvents.filter(item => {
+        if (item.status === "Pending") {
+          scheduledArr.push(item);
+        }
+      });
+      console.log("scheduledArr", scheduledArr);
+      this.setState({ calendarEvents: scheduledArr });
+    } else if (data === "Completed") {
+      dupCalendarEvents.filter(item => {
+        if (item.status === "Completed") {
+          scheduledArr.push(item);
+        }
+      });
+      console.log("scheduledArr", scheduledArr);
+      this.setState({ calendarEvents: scheduledArr });
+    } else {
+      this.setState({ calendarEvents: calendarEvents });
+    }
+  };
+  render() {
+    let { calendarEvents, getentirecompany } = this.state;
+    console.log("calendarEvents===>>>", calendarEvents);
     return (
       <div class="col-md-12">
         <div class="row">
@@ -122,16 +201,38 @@ export default class Scheduler extends React.Component {
                     <label>&nbsp;Allcompany&nbsp;</label>
                   </div>
                   <div class="col-md-1">
-                    <label>Schedule &nbsp;</label>
+                    <label
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.getFilterStatus("Inprogress")}
+                      //onClick={this.getInprogress}
+                    >
+                      Schedule &nbsp;
+                    </label>
+                    <br></br>
                   </div>
                   <div class="col-md-1">
-                    <label>&nbsp;Assesed &nbsp;</label>
+                    <label
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.getFilterStatus("Assesed")}
+                    >
+                      &nbsp;Assesed &nbsp;
+                    </label>
                   </div>
                   <div class="col-md-1">
-                    <label>Installed &nbsp;</label>
+                    <label
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.getFilterStatus("Completed")}
+                    >
+                      Installed &nbsp;
+                    </label>
                   </div>
                   <div class="col-md-1">
-                    <label>Pending</label>
+                    <label
+                      style={{ cursor: "pointer" }}
+                      onClick={() => this.getFilterStatus("Pending")}
+                    >
+                      Pending
+                    </label>
                   </div>
                 </div>
               </div>
@@ -143,7 +244,7 @@ export default class Scheduler extends React.Component {
 
               <div>
                 <div className="d-flex flex-wrap">
-                  {calendarEvents.map(item => {
+                  {getentirecompany.map(item => {
                     return (
                       <div className="p-1">
                         <label
@@ -151,18 +252,19 @@ export default class Scheduler extends React.Component {
                           style={{
                             // width: "30%",
                             background:
-                              item.status === "Assesed"
+                              item === "UST"
                                 ? "red"
-                                : item.status === "Pending"
-                                ? "yellow"
-                                : item.status === "Completed"
+                                : item === "INT"
+                                ? "orange"
+                                : item === "Firex"
                                 ? "green"
-                                : item.status === "Inprogress"
-                                ? "grey"
+                                : item === "Saaj"
+                                ? "#0678be"
                                 : null
                           }}
                         >
-                          {item.title}&nbsp;&nbsp;
+                          {item}
+                          &nbsp;&nbsp;
                         </label>
                       </div>
                     );
