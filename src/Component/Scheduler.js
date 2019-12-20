@@ -1,10 +1,14 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import Fullcalendar from "./Fullcalendar";
+import Avatar from "@material-ui/core/Avatar";
+import Select from "react-select";
 export default class Scheduler extends React.Component {
   state = {
     dupCalendarEvents: "",
     getentirecompany: [],
+    selectedOption: "",
+    options: "",
     calendarEvents: [
       // initial event data
 
@@ -14,13 +18,14 @@ export default class Scheduler extends React.Component {
         title: "A90901",
         BuildingName: "Burj kalifa",
         //orderID: 451515,
-        start: new Date(2019, 11, 15, 10, 0),
-        end: new Date(2019, 11, 15, 12, 30),
+        start: new Date(2019, 11, 22, 10, 0),
+        end: new Date(2019, 11, 22, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 15),
         integratorAdmin: "mohammed",
         integratorTeam: "salman But",
-        backgroundColor: "red",
+        //backgroundColor: "red",
+        backgroundColorCompany: "red",
         companyName: "UST",
         description: "long description"
       },
@@ -29,13 +34,14 @@ export default class Scheduler extends React.Component {
         title: "A1204",
         BuildingName: "Effel Tower",
         //orderID: 451515,
-        start: new Date(2019, 11, 15, 10, 0),
-        end: new Date(2019, 11, 15, 12, 30),
+        start: new Date(2019, 11, 22, 10, 0),
+        end: new Date(2019, 11, 22, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 15),
         integratorAdmin: "mohammed",
         integratorTeam: "salman But",
-        backgroundColor: "red",
+        backgroundColorCompany: "red",
+        // backgroundColor: "red",
         companyName: "UST"
       },
       {
@@ -43,27 +49,30 @@ export default class Scheduler extends React.Component {
         title: "A1444",
         BuildingName: "Thule Air Crash Report",
         //orderID: 21512,
-        start: new Date(2019, 11, 16, 10, 0),
-        end: new Date(2019, 11, 16, 12, 30),
+        start: new Date(2019, 11, 23, 10, 0),
+        end: new Date(2019, 11, 23, 12, 30),
         status: "Pending",
         appointmentTime: new Date(2019, 11, 16),
         integratorAdmin: "Ajmal",
         integratorTeam: "akmal",
-        backgroundColor: "green",
+        //backgroundColor: "green",
+
+        backgroundColorCompany: "green",
         companyName: "Firex"
       },
       {
         Id: 3,
-        title: "A15504",
+        title: "A43504",
         BuildingName: "Blue Moon Eclipse",
         //orderID: 336221,
-        start: new Date(2019, 11, 17, 10, 0),
-        end: new Date(2019, 11, 17, 12, 30),
+        start: new Date(2019, 11, 24, 10, 0),
+        end: new Date(2019, 11, 17, 24, 30),
         status: "Completed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Riyas",
         integratorTeam: "rashid khan",
-        backgroundColor: "orange",
+        //backgroundColor: "orange",
+        backgroundColorCompany: "orange",
         companyName: "INT"
       },
       {
@@ -71,13 +80,14 @@ export default class Scheduler extends React.Component {
         title: "A04204",
         BuildingName: "Meteor Showers in 2018",
         // orderID: 84848,
-        start: new Date(2019, 11, 17, 10, 0),
-        end: new Date(2019, 11, 17, 12, 30),
+        start: new Date(2019, 11, 24, 10, 0),
+        end: new Date(2019, 11, 24, 12, 30),
         status: "Inprogress",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "#0678be",
+        backgroundColorCompany: "#0678be",
+        //backgroundColor: "#0678be",
         companyName: "Saaj"
       },
       {
@@ -85,27 +95,29 @@ export default class Scheduler extends React.Component {
         title: "A8804",
         BuildingName: "Catacombs",
         //orderID: 84848,
-        start: new Date(2019, 11, 17, 10, 0),
-        end: new Date(2019, 11, 17, 12, 30),
+        start: new Date(2019, 11, 124, 10, 0),
+        end: new Date(2019, 11, 124, 12, 30),
         status: "Completed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "#0678be",
+        backgroundColorCompany: "#0678be",
+        // backgroundColor: "#0678be",
         companyName: "Saaj"
       },
       {
         Id: 4,
-        title: "A15504",
+        title: "A15604",
         BuildingName: "Riyas",
         //orderID: 84848,
-        start: new Date(2019, 11, 17, 10, 0),
-        end: new Date(2019, 11, 17, 12, 30),
+        start: new Date(2019, 11, 24, 10, 0),
+        end: new Date(2019, 11, 24, 12, 30),
         status: "Pending",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "orange",
+        backgroundColorCompany: "orange",
+        //backgroundColor: "orange",
         companyName: "INT"
       },
       {
@@ -113,13 +125,14 @@ export default class Scheduler extends React.Component {
         title: "A6574",
         BuildingName: "ellaman",
         //orderID: 84848,
-        start: new Date(2019, 11, 17, 10, 0),
-        end: new Date(2019, 11, 17, 12, 30),
+        start: new Date(2019, 11, 26, 10, 0),
+        end: new Date(2019, 11, 26, 12, 30),
         status: "Assesed",
         appointmentTime: new Date(2019, 11, 17),
         integratorAdmin: "Abdullah",
         integratorTeam: "shakib",
-        backgroundColor: "green",
+        //backgroundColor: "green",
+        backgroundColorCompany: "green",
         companyName: "Firex"
       }
     ]
@@ -134,11 +147,36 @@ export default class Scheduler extends React.Component {
     let { calendarEvents } = this.state;
 
     var getEntireCompany = calendarEvents.map(item => {
-      return item.companyName;
+      var getentireCompanyBackground = {};
+      getentireCompanyBackground["companyName"] = item.companyName;
+      getentireCompanyBackground["backgroundColorCompany"] =
+        item.backgroundColorCompany;
+      return getentireCompanyBackground;
     });
     var arrset = Array.from(new Set(getEntireCompany));
     console.log("getEntireCompany", arrset);
-    this.setState({ getentirecompany: arrset });
+    var grades = {};
+    var gradesArr = [];
+    getEntireCompany.forEach(function(item) {
+      var grade = (grades[item.companyName] = grades[item.companyName] || {});
+      grade["backgroundColor"] = item.backgroundColorCompany;
+    });
+    gradesArr.push(grades);
+
+    console.log("grades", grades, gradesArr);
+
+    //getcompany name
+    var onlyCompanyNameArr = [];
+    calendarEvents.map(item => {
+      var onlyCompanyName = {};
+      onlyCompanyName["label"] = item.companyName;
+      onlyCompanyName["value"] = item.companyName;
+      onlyCompanyNameArr.push(onlyCompanyName);
+    });
+
+    var arrset1 = Array.from(new Set(onlyCompanyNameArr));
+    console.log("onlyCompanyName======>>>>", arrset1);
+    this.setState({ getentirecompany: arrset, options: arrset1 });
   };
 
   getFilterStatus = data => {
@@ -182,8 +220,18 @@ export default class Scheduler extends React.Component {
       this.setState({ calendarEvents: calendarEvents });
     }
   };
+  handleChange = selectedOption => {
+    this.setState({ selectedOption }, () =>
+      console.log(`Option selected:`, this.state.selectedOption)
+    );
+  };
   render() {
-    let { calendarEvents, getentirecompany } = this.state;
+    let {
+      calendarEvents,
+      getentirecompany,
+      selectedOption,
+      options
+    } = this.state;
     console.log("calendarEvents===>>>", calendarEvents);
     return (
       <div class="col-md-12">
@@ -193,47 +241,101 @@ export default class Scheduler extends React.Component {
           </div>
           <div class="col-md-10" style={{ padding: "3%", float: "right" }}>
             <Card style={{ width: "90%", padding: "3%" }}>
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="row-md-2">
-                    <label style={{ color: "red" }}>Scheduler &nbsp;</label>
-                    <label> &nbsp;PPM Schedule &nbsp;</label>
-                    <label>&nbsp;Allcompany&nbsp;</label>
-                  </div>
-                  <div class="col-md-1">
-                    <label
-                      style={{ cursor: "pointer" }}
-                      onClick={() => this.getFilterStatus("Inprogress")}
-                      //onClick={this.getInprogress}
-                    >
-                      Schedule &nbsp;
-                    </label>
-                    <br></br>
-                  </div>
-                  <div class="col-md-1">
-                    <label
-                      style={{ cursor: "pointer" }}
-                      onClick={() => this.getFilterStatus("Assesed")}
-                    >
-                      &nbsp;Assesed &nbsp;
-                    </label>
-                  </div>
-                  <div class="col-md-1">
-                    <label
-                      style={{ cursor: "pointer" }}
-                      onClick={() => this.getFilterStatus("Completed")}
-                    >
-                      Installed &nbsp;
-                    </label>
-                  </div>
-                  <div class="col-md-1">
-                    <label
-                      style={{ cursor: "pointer" }}
-                      onClick={() => this.getFilterStatus("Pending")}
-                    >
-                      Pending
-                    </label>
-                  </div>
+              <div className="d-flex flex-wrap">
+                <label style={{ color: "red" }}>Scheduler &nbsp;</label>
+                <label style={{ color: "grey" }}>
+                  {" "}
+                  &nbsp;PPM Schedule&nbsp;
+                </label>
+                <Select
+                  class="w-25 p-3"
+                  style={{ background: "black" }}
+                  value={selectedOption}
+                  onChange={this.handleChange}
+                  options={options}
+                />
+                <div
+                  className="col-md-1 d-flex flex-wrap"
+                  onClick={() => this.getFilterStatus("Inprogress")}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    className="ml-2"
+                    //onClick={() => this.getFilterStatus("Inprogress")}
+                    style={{
+                      backgroundColor: "black",
+                      cursor: "pointer",
+                      textAlign: "center"
+                    }}
+                  >
+                    S
+                  </Avatar>
+                  <label style={{ cursor: "pointer" }}>
+                    &nbsp;Schedule &nbsp;
+                  </label>
+                </div>
+                <div
+                  className="col-md-1 d-flex flex-wrap"
+                  onClick={() => this.getFilterStatus("Assesed")}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    className="ml-2"
+                    //onClick={() => this.getFilterStatus("Inprogress")}
+                    style={{
+                      backgroundColor: "black",
+                      cursor: "pointer",
+                      textAlign: "center"
+                    }}
+                  >
+                    A
+                  </Avatar>
+                  <label
+                    style={{ cursor: "pointer" }}
+                    // onClick={() => this.getFilterStatus("Assesed")}
+                  >
+                    &nbsp;Assesed &nbsp;
+                  </label>
+                </div>
+                <div
+                  className="col-md-1 d-flex flex-wrap"
+                  onClick={() => this.getFilterStatus("Completed")}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    className="ml-2"
+                    //onClick={() => this.getFilterStatus("Inprogress")}
+                    style={{
+                      backgroundColor: "black",
+                      cursor: "pointer",
+                      textAlign: "center"
+                    }}
+                  >
+                    I
+                  </Avatar>
+                  <label style={{ cursor: "pointer" }}>
+                    &nbsp;Installed &nbsp;
+                  </label>
+                </div>
+                <div
+                  className="col-md-1 d-flex flex-wrap"
+                  onClick={() => this.getFilterStatus("Pending")}
+                >
+                  <Avatar
+                    alt="Remy Sharp"
+                    className="ml-2"
+                    //onClick={() => this.getFilterStatus("Inprogress")}
+                    style={{
+                      backgroundColor: "black",
+                      cursor: "pointer",
+                      textAlign: "center"
+                    }}
+                  >
+                    P
+                  </Avatar>
+                  <label style={{ cursor: "pointer" }}>
+                    &nbsp;Pending &nbsp;
+                  </label>
                 </div>
               </div>
               <div class="col-md-12">
@@ -251,19 +353,10 @@ export default class Scheduler extends React.Component {
                           className="p-2"
                           style={{
                             // width: "30%",
-                            background:
-                              item === "UST"
-                                ? "red"
-                                : item === "INT"
-                                ? "orange"
-                                : item === "Firex"
-                                ? "green"
-                                : item === "Saaj"
-                                ? "#0678be"
-                                : null
+                            background: item.backgroundColorCompany
                           }}
                         >
-                          {item}
+                          {item.companyName}
                           &nbsp;&nbsp;
                         </label>
                       </div>

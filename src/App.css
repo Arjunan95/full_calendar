@@ -56,18 +56,24 @@ input {
   outline: 0;
   font-size: 12px;
   border-width: 0 0 1px;
-  border-color: grey
+  border-color: grey;
 }
-.overalldialogue{
+.overalldialogue {
   width: "80%";
 }
-.tableHead{
+.tableHead {
   font-size: 12 !important;
- 
+
   /* background-color: #61dafb; */
 }
 .MuiDialog-paper {
   /* margin: 32px; */
   position: relative;
   overflow-y: auto;
+}
+
+.fc-event,
+.fc-event-dot {
+  background-color: transparent !important;
+  border: solid 1px white !important;
 }

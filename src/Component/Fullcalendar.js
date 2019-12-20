@@ -12,6 +12,7 @@ import "@fullcalendar/daygrid/main.css";
 import "@fullcalendar/timegrid/main.css";
 import swal from "sweetalert";
 import ReactDOM from "react-dom";
+import Event, { eventNewDiv } from "./EventChangeing";
 // import { Card,ListGroup,Modal,Button } from 'react-bootstrap';
 import DialogTitle from "@material-ui/core/DialogTitle";
 import List from "@material-ui/core/List";
@@ -132,17 +133,19 @@ export default class DemoApp extends React.Component {
       swal("Unable to add events");
     }
   };
-  getRenderDetails = (event, el) => {
-    console.log("el", event, el);
-    const content = (
-      <div>
-        {event.title}
-        <div>{event.description}</div>
-      </div>
-    );
-    // ReactDOM.render(content, el);
-    return content, el;
+  getRenderDetails = info => {
+    console.log("info", info);
+    var tooltip =
+      (info.el,
+      {
+        title: info.event.extendedProps.description,
+        placement: "top",
+        trigger: "hover",
+        container: "body"
+      });
+    console.log("tooltip", tooltip);
   };
+
   render() {
     let { data } = this.props;
 
@@ -177,7 +180,16 @@ export default class DemoApp extends React.Component {
               eventLimit={true}
               //eventData={this.setEventByCalendar(calendarEvents)}
               events={data}
-              eventRender={this.getRenderDetails}
+              // eventRender={info => {
+              //   return (
+              //     <div className="fc-content">
+              //       <span className="fc-title">{info.event.title}</span>
+              //     </div>
+              //   );
+              //   //return info.el
+              // }}
+              eventRender={eventNewDiv}
+              // eventRender={this.getRenderDetails}
               // eventClick={function(calEvent, jsEvent, view, resourceObj) {
               //   console.log(calEvent.event._def);
               // }}
@@ -322,10 +334,5 @@ export default class DemoApp extends React.Component {
       // update a property
       calendarWeekends: !this.state.calendarWeekends
     });
-  };
-
-  gotoPast = () => {
-    let calendarApi = this.calendarComponentRef.current.getApi();
-    calendarApi.gotoDate("2000-01-01"); // call a method on the Calendar object
   };
 }
