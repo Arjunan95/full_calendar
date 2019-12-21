@@ -52,11 +52,23 @@
 }
 /* style */
 input {
-  width: 89% !important;
+  width: 100% !important;
   outline: 0;
   font-size: 12px;
   border-width: 0 0 1px;
   border-color: grey;
+}
+select option {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+.optimg {
+  /* position: relative; */
+  left: 0px;
+  top: 0px;
+  z-index: -1;
 }
 .overalldialogue {
   width: "80%";
@@ -76,4 +88,7 @@ input {
 .fc-event-dot {
   background-color: transparent !important;
   border: solid 1px white !important;
+}
+.inputTextBox {
+  width: "90%" !important;
 }

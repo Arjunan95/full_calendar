@@ -63,7 +63,7 @@ export const EventContent = ({ event }) => {
               fontSize: "0.9rem"
             }}
           >
-            C
+            I
           </Avatar>
         ) : totalStatus === "Inprogress" ? (
           <Avatar
@@ -75,7 +75,7 @@ export const EventContent = ({ event }) => {
               fontSize: "0.9rem"
             }}
           >
-            I
+            S
           </Avatar>
         ) : null}
       </label>

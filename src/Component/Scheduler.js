@@ -3,12 +3,15 @@ import { Card } from "react-bootstrap";
 import Fullcalendar from "./Fullcalendar";
 import Avatar from "@material-ui/core/Avatar";
 import Select from "react-select";
+import _ from "lodash";
+import swal from "sweetalert";
 export default class Scheduler extends React.Component {
   state = {
     dupCalendarEvents: "",
     getentirecompany: [],
     selectedOption: "",
     options: "",
+    checkCompanyName: "All",
     calendarEvents: [
       // initial event data
 
@@ -36,7 +39,7 @@ export default class Scheduler extends React.Component {
         //orderID: 451515,
         start: new Date(2019, 11, 22, 10, 0),
         end: new Date(2019, 11, 22, 12, 30),
-        status: "Assesed",
+        status: "Pending",
         appointmentTime: new Date(2019, 11, 15),
         integratorAdmin: "mohammed",
         integratorTeam: "salman But",
@@ -144,7 +147,7 @@ export default class Scheduler extends React.Component {
     // this.setState({ dupCalendarEvents: calendarEvents });
   }
   getCompanyName = () => {
-    let { calendarEvents } = this.state;
+    let { calendarEvents, checkCompanyName } = this.state;
 
     var getEntireCompany = calendarEvents.map(item => {
       var getentireCompanyBackground = {};
@@ -155,72 +158,130 @@ export default class Scheduler extends React.Component {
     });
     var arrset = Array.from(new Set(getEntireCompany));
     console.log("getEntireCompany", arrset);
-    var grades = {};
-    var gradesArr = [];
-    getEntireCompany.forEach(function(item) {
-      var grade = (grades[item.companyName] = grades[item.companyName] || {});
-      grade["backgroundColor"] = item.backgroundColorCompany;
-    });
-    gradesArr.push(grades);
+    // var grades = {};
+    // var gradesArr = [];
+    // getEntireCompany.forEach(function(item) {
+    //   var grade = (grades[item.companyName] = grades[item.companyName] || {});
+    //   grade["backgroundColor"] = item.backgroundColorCompany;
+    // });
+    // gradesArr.push(grades);
 
-    console.log("grades", grades, gradesArr);
+    var getUniqueArr = [];
+    getEntireCompany.map(item => {
+      var getUniqueJson = {};
+      getUniqueJson["companyname"] = item.companyName;
+      getUniqueJson["backgroundColor"] = item.backgroundColorCompany;
+      getUniqueArr.push(getUniqueJson);
+    });
+    console.log("getUniqueArr---->>>", getUniqueArr);
+
+    const res = _.uniqBy(getUniqueArr, "companyname");
+    console.log("ressss---->>>", res);
+
+    //console.log("grades", grades, gradesArr);
 
     //getcompany name
     var onlyCompanyNameArr = [];
     calendarEvents.map(item => {
       var onlyCompanyName = {};
+
       onlyCompanyName["label"] = item.companyName;
       onlyCompanyName["value"] = item.companyName;
       onlyCompanyNameArr.push(onlyCompanyName);
     });
+    onlyCompanyNameArr.push({ label: "All", value: "All" });
+    //var arrset1 = Array.from(new Set(onlyCompanyNameArr));
+    console.log("onlyCompanyName======>>>>", onlyCompanyNameArr);
 
-    var arrset1 = Array.from(new Set(onlyCompanyNameArr));
-    console.log("onlyCompanyName======>>>>", arrset1);
-    this.setState({ getentirecompany: arrset, options: arrset1 });
+    const res1 = _.uniqBy(onlyCompanyNameArr, "label");
+    console.log("res1---->>>", res1);
+
+    this.setState({ getentirecompany: res, options: res1 });
   };
 
   getFilterStatus = data => {
-    let { calendarEvents, dupCalendarEvents } = this.state;
+    let { calendarEvents, dupCalendarEvents, checkCompanyName } = this.state;
     console.log("schedule------->>>", data);
+    console.log("checkCompanyName===>>>", checkCompanyName);
     // var dupCalendarEvents = calendarEvents;
-    var scheduledArr = [];
-    if (data === "Assesed") {
+    //getSelectedcompany details===========>
+    if (checkCompanyName !== "All") {
+      var getSelectedCompanyDetails = [];
       dupCalendarEvents.filter(item => {
-        if (item.status === "Assesed") {
-          scheduledArr.push(item);
+        if (item.companyName === checkCompanyName) {
+          if (item.status === data) {
+            getSelectedCompanyDetails.push(item);
+          }
         }
       });
-      console.log("scheduledArr", scheduledArr);
-      this.setState({ calendarEvents: scheduledArr });
-    } else if (data === "Inprogress") {
-      dupCalendarEvents.filter(item => {
-        if (item.status === "Inprogress") {
-          scheduledArr.push(item);
-        }
-      });
-      console.log("scheduledArr", scheduledArr);
-      this.setState({ calendarEvents: scheduledArr });
-    } else if (data === "Pending") {
-      dupCalendarEvents.filter(item => {
-        if (item.status === "Pending") {
-          scheduledArr.push(item);
-        }
-      });
-      console.log("scheduledArr", scheduledArr);
-      this.setState({ calendarEvents: scheduledArr });
-    } else if (data === "Completed") {
-      dupCalendarEvents.filter(item => {
-        if (item.status === "Completed") {
-          scheduledArr.push(item);
-        }
-      });
-      console.log("scheduledArr", scheduledArr);
-      this.setState({ calendarEvents: scheduledArr });
+      if (getSelectedCompanyDetails.length === 0) {
+        swal(data + " is not in this company");
+      } else {
+        console.log("ddjddjddj", getSelectedCompanyDetails);
+        this.setState({ calendarEvents: getSelectedCompanyDetails });
+      }
     } else {
-      this.setState({ calendarEvents: calendarEvents });
+      var scheduledArr = [];
+      if (data === "Assesed") {
+        dupCalendarEvents.filter(item => {
+          if (item.status === "Assesed") {
+            scheduledArr.push(item);
+          }
+        });
+        console.log("scheduledArr", scheduledArr);
+        this.setState({ calendarEvents: scheduledArr });
+      } else if (data === "Inprogress") {
+        dupCalendarEvents.filter(item => {
+          if (item.status === "Inprogress") {
+            scheduledArr.push(item);
+          }
+        });
+        console.log("scheduledArr", scheduledArr);
+        this.setState({ calendarEvents: scheduledArr });
+      } else if (data === "Pending") {
+        dupCalendarEvents.filter(item => {
+          if (item.status === "Pending") {
+            scheduledArr.push(item);
+          }
+        });
+        console.log("scheduledArr", scheduledArr);
+        this.setState({ calendarEvents: scheduledArr });
+      } else if (data === "Completed") {
+        dupCalendarEvents.filter(item => {
+          if (item.status === "Completed") {
+            scheduledArr.push(item);
+          }
+        });
+        console.log("scheduledArr", scheduledArr);
+        this.setState({ calendarEvents: scheduledArr });
+      } else {
+        this.setState({ calendarEvents: calendarEvents });
+      }
     }
   };
   handleChange = selectedOption => {
+    let { dupCalendarEvents, calendarEvents } = this.state;
+    const val = selectedOption.value;
+
+    var scheduledArr = [];
+    if (val === "All") {
+      this.setState({
+        calendarEvents: dupCalendarEvents,
+        checkCompanyName: val
+      });
+    } else {
+      dupCalendarEvents.filter(item => {
+        if (item.companyName === val) {
+          scheduledArr.push(item);
+        }
+      });
+      console.log("scheduledArr inside", scheduledArr.companyName);
+      this.setState({ calendarEvents: scheduledArr, checkCompanyName: val });
+    }
+
+    //this.setState({ calendarEvents: scheduledArr });
+
+    console.log("val===>>>", val);
     this.setState({ selectedOption }, () =>
       console.log(`Option selected:`, this.state.selectedOption)
     );
@@ -236,9 +297,6 @@ export default class Scheduler extends React.Component {
     return (
       <div class="col-md-12">
         <div class="row">
-          <div calss="col-md-6">
-            <h2></h2>
-          </div>
           <div class="col-md-10" style={{ padding: "3%", float: "right" }}>
             <Card style={{ width: "90%", padding: "3%" }}>
               <div className="d-flex flex-wrap">
@@ -247,13 +305,16 @@ export default class Scheduler extends React.Component {
                   {" "}
                   &nbsp;PPM Schedule&nbsp;
                 </label>
-                <Select
-                  class="w-25 p-3"
-                  style={{ background: "black" }}
-                  value={selectedOption}
-                  onChange={this.handleChange}
-                  options={options}
-                />
+                <div className="col-md-3">
+                  <Select
+                    style={{ backgroundColor: "black", zIndex: -1 }}
+                    value={selectedOption}
+                    onChange={this.handleChange}
+                    options={options}
+                  >
+                    <option style={{ background: "red" }}>{options}</option>
+                  </Select>
+                </div>
                 <div
                   className="col-md-1 d-flex flex-wrap"
                   onClick={() => this.getFilterStatus("Inprogress")}
@@ -353,10 +414,10 @@ export default class Scheduler extends React.Component {
                           className="p-2"
                           style={{
                             // width: "30%",
-                            background: item.backgroundColorCompany
+                            background: item.backgroundColor
                           }}
                         >
-                          {item.companyName}
+                          {item.companyname}
                           &nbsp;&nbsp;
                         </label>
                       </div>

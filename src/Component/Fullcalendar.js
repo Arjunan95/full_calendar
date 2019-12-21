@@ -213,7 +213,7 @@ export default class DemoApp extends React.Component {
             // aria-labelledby="simple-dialog-title"
             //open={show}
           >
-            <div className="w-95 p-4">
+            <div className="w-100 p-4">
               <DialogTitle id="alert-dialog-slide-title">COMPANIES</DialogTitle>
               <List>
                 {SelectedBuilding.map(obj => {
@@ -236,7 +236,13 @@ export default class DemoApp extends React.Component {
                               : null
                         }}
                       >
-                        <font style={{ color: "white", marginLeft: "6%" }}>
+                        <font
+                          style={{
+                            color: "white",
+                            marginLeft: "6%",
+                            width: "100%"
+                          }}
+                        >
                           {obj.status}
                         </font>
                       </label>
@@ -252,6 +258,8 @@ export default class DemoApp extends React.Component {
                             <tr>
                               <input
                                 name="orderId"
+                                className="inputTextBox"
+                                style={{ width: "90%" }}
                                 type="text"
                                 value={obj.BuildingName}
                               />
