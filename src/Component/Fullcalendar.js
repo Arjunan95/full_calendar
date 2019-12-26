@@ -56,29 +56,30 @@ export default class DemoApp extends React.Component {
     let { calendarEvents, show } = this.state;
     console.log(calEvent.event._def.extendedProps);
     var selectedDate = calEvent.event._def.extendedProps.appointmentTime;
-    console.log("selectedDate", selectedDate);
+    console.log("selectedDate", selectedDate,calendarEvents);
 
     let SelectedBuilding1 = [];
 
-    calendarEvents.filter(item => {
-      console.log(
-        "inside filter",
-        moment(item.appointmentTime).format("YYYY-MM-DD"),
-        moment(selectedDate).format("YYYY-MM-DD")
-      );
-      console.log("sas", item.appointmentTime === selectedDate);
-      if (
-        moment(item.appointmentTime).format("YYYY-MM-DD") ===
-        moment(selectedDate).format("YYYY-MM-DD")
-      ) {
-        console.log("inside item====>>>", item);
+SelectedBuilding1.push(calEvent.event._def.extendedProps)
+    // calendarEvents.filter(item => {
+    //   console.log(
+    //     "inside filter",
+    //     moment(item.appointmentTime).format("YYYY-MM-DD"),
+    //     moment(selectedDate).format("YYYY-MM-DD")
+    //   );
+    //   console.log("sas", item.appointmentTime === selectedDate);
+    //   if (
+    //     moment(item.appointmentTime).format("YYYY-MM-DD") ===
+    //     moment(selectedDate).format("YYYY-MM-DD")
+    //   ) {
+    //     console.log("inside item====>>>", item);
 
-        if (item.appointmentTime === selectedDate) {
-          SelectedBuilding1.push(item);
-        }
-      } else {
-      }
-    });
+    //     if (item.appointmentTime === selectedDate) {
+    //       SelectedBuilding1.push(item);
+    //     }
+    //   } else {
+    //   }
+    // });
     console.log("SelectedBuilding=======>>>", SelectedBuilding1);
 
     this.setState({ SelectedBuilding: SelectedBuilding1, show: !show });
@@ -97,15 +98,17 @@ export default class DemoApp extends React.Component {
     this.setState({ isOpen: !isOpen });
   };
   handleDateClick = calEvent => {
-    let { calendarEvents, show } = this.state;
+    let { calendarEvents, show,SelectedBuilding } = this.state;
     console.log(calEvent.date);
     var ShowEntireData = calEvent.date;
+    console.log("ffff-->>>", SelectedBuilding);
     var selectedDates = [];
     calendarEvents.find(obj => {
       if (
         moment(obj.appointmentTime).format("YYYY-MM-DD") ===
         moment(ShowEntireData).format("YYYY-MM-DD")
       ) {
+        console.log("inside condition")
         selectedDates.push("selectedDates");
       }
     });
@@ -225,7 +228,7 @@ export default class DemoApp extends React.Component {
                           width: "100%",
 
                           background:
-                            obj.status === "Assesed"
+                            obj.status === "Assessed"
                               ? "red"
                               : obj.status === "Pending"
                               ? "Yellow"
@@ -243,7 +246,7 @@ export default class DemoApp extends React.Component {
                             width: "100%"
                           }}
                         >
-                          {obj.status}
+                          {obj.companyName}
                         </font>
                       </label>
 
@@ -271,7 +274,7 @@ export default class DemoApp extends React.Component {
                               <input
                                 name="orderId"
                                 type="text"
-                                value={obj.title}
+                                value={obj.order_id}
                               />
                             </tr>
                             <tr>

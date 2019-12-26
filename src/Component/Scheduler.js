@@ -12,139 +12,193 @@ export default class Scheduler extends React.Component {
     selectedOption: "",
     options: "",
     checkCompanyName: "All",
-    calendarEvents: [
-      // initial event data
+    email:"arjun",
+    calendarEvents:[],
+    // calendarEvents: [
+    //   // initial event data
 
-      {
-        Id: 1,
+    //   {
+    //     Id: 1,
 
-        title: "A90901",
-        BuildingName: "Burj kalifa",
-        //orderID: 451515,
-        start: new Date(2019, 11, 22, 10, 0),
-        end: new Date(2019, 11, 22, 12, 30),
-        status: "Assesed",
-        appointmentTime: new Date(2019, 11, 15),
-        integratorAdmin: "mohammed",
-        integratorTeam: "salman But",
-        //backgroundColor: "red",
-        backgroundColorCompany: "red",
-        companyName: "UST",
-        description: "long description"
-      },
-      {
-        Id: 1,
-        title: "A1204",
-        BuildingName: "Effel Tower",
-        //orderID: 451515,
-        start: new Date(2019, 11, 22, 10, 0),
-        end: new Date(2019, 11, 22, 12, 30),
-        status: "Pending",
-        appointmentTime: new Date(2019, 11, 15),
-        integratorAdmin: "mohammed",
-        integratorTeam: "salman But",
-        backgroundColorCompany: "red",
-        // backgroundColor: "red",
-        companyName: "UST"
-      },
-      {
-        Id: 2,
-        title: "A1444",
-        BuildingName: "Thule Air Crash Report",
-        //orderID: 21512,
-        start: new Date(2019, 11, 23, 10, 0),
-        end: new Date(2019, 11, 23, 12, 30),
-        status: "Pending",
-        appointmentTime: new Date(2019, 11, 16),
-        integratorAdmin: "Ajmal",
-        integratorTeam: "akmal",
-        //backgroundColor: "green",
+    //     title: "A90901",
+    //     BuildingName: "Burj kalifa",
+    //     //orderID: 451515,
+    //     start: new Date(2019, 11, 22, 10, 0),
+    //     end: new Date(2019, 11, 22, 12, 30),
+    //     status: "Assesed",
+    //     appointmentTime: new Date(2019, 11, 15),
+    //     integratorAdmin: "mohammed",
+    //     integratorTeam: "salman But",
+    //     //backgroundColor: "red",
+    //     backgroundColorCompany: "red",
+    //     companyName: "UST",
+    //     description: "long description"
+    //   },
+    //   {
+    //     Id: 1,
+    //     title: "A1204",
+    //     BuildingName: "Effel Tower",
+    //     //orderID: 451515,
+    //     start: new Date(2019, 11, 22, 10, 0),
+    //     end: new Date(2019, 11, 22, 12, 30),
+    //     status: "Pending",
+    //     appointmentTime: new Date(2019, 11, 15),
+    //     integratorAdmin: "mohammed",
+    //     integratorTeam: "salman But",
+    //     backgroundColorCompany: "red",
+    //     // backgroundColor: "red",
+    //     companyName: "UST"
+    //   },
+    //   {
+    //     Id: 2,
+    //     title: "A1444",
+    //     BuildingName: "Thule Air Crash Report",
+    //     //orderID: 21512,
+    //     start: new Date(2019, 11, 23, 10, 0),
+    //     end: new Date(2019, 11, 23, 12, 30),
+    //     status: "Pending",
+    //     appointmentTime: new Date(2019, 11, 16),
+    //     integratorAdmin: "Ajmal",
+    //     integratorTeam: "akmal",
+    //     //backgroundColor: "green",
 
-        backgroundColorCompany: "green",
-        companyName: "Firex"
-      },
-      {
-        Id: 3,
-        title: "A43504",
-        BuildingName: "Blue Moon Eclipse",
-        //orderID: 336221,
-        start: new Date(2019, 11, 24, 10, 0),
-        end: new Date(2019, 11, 17, 24, 30),
-        status: "Completed",
-        appointmentTime: new Date(2019, 11, 17),
-        integratorAdmin: "Riyas",
-        integratorTeam: "rashid khan",
-        //backgroundColor: "orange",
-        backgroundColorCompany: "orange",
-        companyName: "INT"
-      },
-      {
-        Id: 4,
-        title: "A04204",
-        BuildingName: "Meteor Showers in 2018",
-        // orderID: 84848,
-        start: new Date(2019, 11, 24, 10, 0),
-        end: new Date(2019, 11, 24, 12, 30),
-        status: "Inprogress",
-        appointmentTime: new Date(2019, 11, 17),
-        integratorAdmin: "Abdullah",
-        integratorTeam: "shakib",
-        backgroundColorCompany: "#0678be",
-        //backgroundColor: "#0678be",
-        companyName: "Saaj"
-      },
-      {
-        Id: 4,
-        title: "A8804",
-        BuildingName: "Catacombs",
-        //orderID: 84848,
-        start: new Date(2019, 11, 124, 10, 0),
-        end: new Date(2019, 11, 124, 12, 30),
-        status: "Completed",
-        appointmentTime: new Date(2019, 11, 17),
-        integratorAdmin: "Abdullah",
-        integratorTeam: "shakib",
-        backgroundColorCompany: "#0678be",
-        // backgroundColor: "#0678be",
-        companyName: "Saaj"
-      },
-      {
-        Id: 4,
-        title: "A15604",
-        BuildingName: "Riyas",
-        //orderID: 84848,
-        start: new Date(2019, 11, 24, 10, 0),
-        end: new Date(2019, 11, 24, 12, 30),
-        status: "Pending",
-        appointmentTime: new Date(2019, 11, 17),
-        integratorAdmin: "Abdullah",
-        integratorTeam: "shakib",
-        backgroundColorCompany: "orange",
-        //backgroundColor: "orange",
-        companyName: "INT"
-      },
-      {
-        Id: 4,
-        title: "A6574",
-        BuildingName: "ellaman",
-        //orderID: 84848,
-        start: new Date(2019, 11, 26, 10, 0),
-        end: new Date(2019, 11, 26, 12, 30),
-        status: "Assesed",
-        appointmentTime: new Date(2019, 11, 17),
-        integratorAdmin: "Abdullah",
-        integratorTeam: "shakib",
-        //backgroundColor: "green",
-        backgroundColorCompany: "green",
-        companyName: "Firex"
-      }
-    ]
+    //     backgroundColorCompany: "green",
+    //     companyName: "Firex"
+    //   },
+    //   {
+    //     Id: 3,
+    //     title: "A43504",
+    //     BuildingName: "Blue Moon Eclipse",
+    //     //orderID: 336221,
+    //     start: new Date(2019, 11, 24, 10, 0),
+    //     end: new Date(2019, 11, 17, 24, 30),
+    //     status: "Completed",
+    //     appointmentTime: new Date(2019, 11, 17),
+    //     integratorAdmin: "Riyas",
+    //     integratorTeam: "rashid khan",
+    //     //backgroundColor: "orange",
+    //     backgroundColorCompany: "orange",
+    //     companyName: "INT"
+    //   },
+    //   {
+    //     Id: 4,
+    //     title: "A04204",
+    //     BuildingName: "Meteor Showers in 2018",
+    //     // orderID: 84848,
+    //     start: new Date(2019, 11, 24, 10, 0),
+    //     end: new Date(2019, 11, 24, 12, 30),
+    //     status: "Inprogress",
+    //     appointmentTime: new Date(2019, 11, 17),
+    //     integratorAdmin: "Abdullah",
+    //     integratorTeam: "shakib",
+    //     backgroundColorCompany: "#0678be",
+    //     //backgroundColor: "#0678be",
+    //     companyName: "Saaj"
+    //   },
+    //   {
+    //     Id: 4,
+    //     title: "A8804",
+    //     BuildingName: "Catacombs",
+    //     //orderID: 84848,
+    //     start: new Date(2019, 11, 124, 10, 0),
+    //     end: new Date(2019, 11, 124, 12, 30),
+    //     status: "Completed",
+    //     appointmentTime: new Date(2019, 11, 17),
+    //     integratorAdmin: "Abdullah",
+    //     integratorTeam: "shakib",
+    //     backgroundColorCompany: "#0678be",
+    //     // backgroundColor: "#0678be",
+    //     companyName: "Saaj"
+    //   },
+    //   {
+    //     Id: 4,
+    //     title: "A15604",
+    //     BuildingName: "Riyas",
+    //     //orderID: 84848,
+    //     start: new Date(2019, 11, 24, 10, 0),
+    //     end: new Date(2019, 11, 24, 12, 30),
+    //     status: "Pending",
+    //     appointmentTime: new Date(2019, 11, 17),
+    //     integratorAdmin: "Abdullah",
+    //     integratorTeam: "shakib",
+    //     backgroundColorCompany: "orange",
+    //     //backgroundColor: "orange",
+    //     companyName: "INT"
+    //   },
+    //   {
+    //     Id: 4,
+    //     title: "A6574",
+    //     BuildingName: "ellaman",
+    //     //orderID: 84848,
+    //     start: new Date(2019, 11, 26, 10, 0),
+    //     end: new Date(2019, 11, 26, 12, 30),
+    //     status: "Assesed",
+    //     appointmentTime: new Date(2019, 11, 17),
+    //     integratorAdmin: "Abdullah",
+    //     integratorTeam: "shakib",
+    //     //backgroundColor: "green",
+    //     backgroundColorCompany: "green",
+    //     companyName: "Firex"
+    //   }
+    // ]
   };
-  componentDidMount() {
+  async componentDidMount() {
+    console.log("cmd")
+    var email=sessionStorage.getItem("email")
+    console.log("cmd==>email",email)
+    this.setState({email:email})
     let { calendarEvents } = this.state;
     this.state.dupCalendarEvents = calendarEvents;
-    this.getCompanyName();
+    this.getScheduleDetails(email)
+    
     // this.setState({ dupCalendarEvents: calendarEvents });
+  }
+
+  getScheduleDetails=(email)=>{
+    //fetch(base_url + "/revenue_barchart_data", {
+      fetch("http://192.168.103.96:4000/schedule_admin_aman_details", {
+    
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+       // "Authorization": this.state.token,
+       "authorization":"abc",
+       "email":"integrator@mailinator.com"
+
+      },
+    
+   
+  })
+      .then(response => response.json())
+
+      .then(response => {
+        console.log(response.data.result,"bar response")
+  this.setState({calendarEvents:response.data.result,dupCalendarEvents:response.data.result})
+  this.getCompanyName();
+            });  
+
+
+
+console.log("email---->>>",email)
+    // fetch("http://localhost:4000/schedule_admin_aman_details", {
+    //   method: "POST",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //    // authorization: this.state.token,
+    //    //email:email
+    //    authorization:"abc",
+    //    email:"integrator@mailinator.com"
+    //   },
+    //   body: JSON.stringify({
+    //     email:"integrator@mailinator.com"
+    //    })
+    // })
+    //   .then(r => r.json())
+    //   .then(output => {
+    //     console.log("outputt===>",output)
+    //   })
   }
   getCompanyName = () => {
     let { calendarEvents, checkCompanyName } = this.state;
@@ -222,15 +276,17 @@ export default class Scheduler extends React.Component {
       }
     } else {
       var scheduledArr = [];
-      if (data === "Assesed") {
+      if (data === "Assessed") {
+        console.log("inside function",data)
         dupCalendarEvents.filter(item => {
-          if (item.status === "Assesed") {
+          if (item.status === "Assessed") {
             scheduledArr.push(item);
           }
         });
         console.log("scheduledArr", scheduledArr);
         this.setState({ calendarEvents: scheduledArr });
       } else if (data === "Inprogress") {
+        console.log("inside function",data)
         dupCalendarEvents.filter(item => {
           if (item.status === "Inprogress") {
             scheduledArr.push(item);
@@ -239,6 +295,7 @@ export default class Scheduler extends React.Component {
         console.log("scheduledArr", scheduledArr);
         this.setState({ calendarEvents: scheduledArr });
       } else if (data === "Pending") {
+        console.log("inside function",data)
         dupCalendarEvents.filter(item => {
           if (item.status === "Pending") {
             scheduledArr.push(item);
@@ -247,6 +304,7 @@ export default class Scheduler extends React.Component {
         console.log("scheduledArr", scheduledArr);
         this.setState({ calendarEvents: scheduledArr });
       } else if (data === "Completed") {
+        console.log("inside function",data)
         dupCalendarEvents.filter(item => {
           if (item.status === "Completed") {
             scheduledArr.push(item);
@@ -294,6 +352,8 @@ export default class Scheduler extends React.Component {
       options
     } = this.state;
     console.log("calendarEvents===>>>", calendarEvents);
+    // var email="integrator@gmail.com"
+    // this.getScheduleDetails(email)
     return (
       <div class="col-md-12">
         <div class="row">
@@ -337,7 +397,7 @@ export default class Scheduler extends React.Component {
                 </div>
                 <div
                   className="col-md-1 d-flex flex-wrap"
-                  onClick={() => this.getFilterStatus("Assesed")}
+                  onClick={() => this.getFilterStatus("Assessed")}
                 >
                   <Avatar
                     alt="Remy Sharp"
